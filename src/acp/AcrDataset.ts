@@ -1,6 +1,6 @@
 import { DatasetWrapper } from "rdfjs-wrapper"
-import { AccessControlResource } from "../class/acp/AccessControlResource.js";
-import { ACP } from "../vocabulary/acp.js";
+import { AccessControlResource } from "./AccessControlResource.js";
+import { ACP } from "../vocabulary/mod.js";
 
 export class AcrDataset extends DatasetWrapper {
     get acr(): AccessControlResource | undefined {

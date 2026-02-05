@@ -1,6 +1,6 @@
 import { DatasetWrapper } from "rdfjs-wrapper"
-import { Agent } from "../class/Agent.js"
-import { SOLID } from "../vocabulary/solid.js"
+import { Agent } from "../webid/Agent.js"
+import { SOLID } from "../vocabulary/mod.js"
 
 export class WebIdDataset extends DatasetWrapper{
     get mainSubject(): Agent | undefined {

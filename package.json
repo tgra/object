@@ -6,7 +6,10 @@
   "type": "module",
   "types": "./dist/mod.d.ts",
   "exports": {
-    ".": "./dist/mod.js"
+    ".": "./dist/mod.js",
+    "./acp": "./dist/acp/mod.js",
+    "./solid": "./dist/solid/mod.js",
+    "./webid": "./dist/webid/mod.js"
   },
   "files": [
     "dist"

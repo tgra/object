@@ -1,7 +1,7 @@
 import { TermWrapper } from "rdfjs-wrapper"
 import { Policy } from "./Policy.js"
-import { ACP } from "../../vocabulary/acp.js"
-import { Typed } from "../../util/Typed.js";
+import { ACP } from "../vocabulary/mod.js"
+import { Typed } from "./Typed.js";
 
 export class AccessControl extends Typed {
     get apply(): Set<Policy> {

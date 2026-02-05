@@ -1,7 +1,7 @@
 import { ValueMappings, TermMappings, TermWrapper } from "rdfjs-wrapper"
 import { AccessControl } from "./AccessControl.js"
-import { ACP } from "../../vocabulary/acp.js"
-import { Typed } from "../../util/Typed.js";
+import { ACP } from "../vocabulary/mod.js"
+import { Typed } from "./Typed.js";
 
 export class AccessControlResource extends Typed {
     get accessControl(): Set<AccessControl> {

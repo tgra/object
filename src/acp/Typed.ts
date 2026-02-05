@@ -1,5 +1,5 @@
 import { TermMappings, ValueMappings, TermWrapper } from "rdfjs-wrapper"
-import { RDF } from "../vocabulary/rdf.js"
+import { RDF } from "../vocabulary/mod.js"
 
 export class Typed extends TermWrapper {
     get type(): Set<string> {

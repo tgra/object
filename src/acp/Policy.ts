@@ -1,7 +1,7 @@
 import { TermMappings, ValueMappings, TermWrapper } from "rdfjs-wrapper"
-import { Matcher } from "./Matcher"
-import { ACP } from "../../vocabulary/acp.js"
-import { Typed } from "../../util/Typed.js";
+import { Matcher } from "./Matcher.js"
+import { ACP } from "../vocabulary/mod.js"
+import { Typed } from "./Typed.js";
 
 export class Policy extends Typed {
     get allow(): Set<string> {

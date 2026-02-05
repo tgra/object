@@ -1,6 +1,6 @@
 import { DatasetWrapper } from "rdfjs-wrapper"
-import { Container } from "../class/Container.js"
-import { LDP } from "../vocabulary/ldp.js"
+import { Container } from "./Container.js"
+import { LDP } from "../vocabulary/mod.js"
 
 export class ContainerDataset extends DatasetWrapper {
     // TODO: Consider that this might be undefined if there are no contained resources. We might need different matching.

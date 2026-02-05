@@ -1,6 +1,6 @@
 import { TermMappings, ValueMappings } from "rdfjs-wrapper"
-import { ACP } from "../../vocabulary/acp.js"
-import { Typed } from "../../util/Typed.js";
+import { ACP } from "../vocabulary/mod.js"
+import { Typed } from "./Typed.js";
 
 export class Matcher extends Typed {
     get agent(): Set<string> {
