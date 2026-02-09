@@ -5,4 +5,8 @@ export const FOAF = {
   email: "http://xmlns.com/foaf/0.1/email",
   homepage: "http://xmlns.com/foaf/0.1/homepage",
   knows: "http://xmlns.com/foaf/0.1/knows",
+  Person: "http://xmlns.com/foaf/0.1/Person",
+  PersonalProfileDocument:  "http://xmlns.com/foaf/0.1/PersonalProfileDocument",
+  maker:        "http://xmlns.com/foaf/0.1/maker"
+ 
 } as const;
