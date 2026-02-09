@@ -1,4 +1,4 @@
-import { TermMappings, ValueMappings, TermWrapper,  DatasetWrapper, } from "rdfjs-wrapper"
+import { TermMappings, ValueMappings, TermWrapper,  DatasetWrapper } from "rdfjs-wrapper"
 import {  ICAL } from "../vocabulary/mod.js"
 
 
@@ -7,7 +7,6 @@ export class MeetingDataset extends DatasetWrapper {
         return this.instancesOf(ICAL.vevent, Meeting)
     }
 }
-
 
 export class Meeting extends TermWrapper {
     get summary(): string | undefined {
