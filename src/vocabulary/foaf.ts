@@ -1,12 +1,21 @@
 export const FOAF = {
-  isPrimaryTopicOf: "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
-  primaryTopic: "http://xmlns.com/foaf/0.1/primaryTopic",
-  name: "http://xmlns.com/foaf/0.1/name",
+  account: "http://xmlns.com/foaf/0.1/account",
+  accountName: "http://xmlns.com/foaf/0.1/accountName",
   email: "http://xmlns.com/foaf/0.1/email",
   homepage: "http://xmlns.com/foaf/0.1/homepage",
+  icon: "http://xmlns.com/foaf/0.1/icon",
+  isPrimaryTopicOf: "http://xmlns.com/foaf/0.1/isPrimaryTopicOf",
   knows: "http://xmlns.com/foaf/0.1/knows",
+  maker: "http://xmlns.com/foaf/0.1/maker",
+  name: "http://xmlns.com/foaf/0.1/name",
+  nick: "http://xmlns.com/foaf/0.1/nick",
+  primaryTopic: "http://xmlns.com/foaf/0.1/primaryTopic",
+
+
+  Account: "http://xmlns.com/foaf/0.1/Account",
+  OnlineAccount: "http://xmlns.com/foaf/0.1/OnlineAccount",
   Person: "http://xmlns.com/foaf/0.1/Person",
-  PersonalProfileDocument:  "http://xmlns.com/foaf/0.1/PersonalProfileDocument",
-  maker:        "http://xmlns.com/foaf/0.1/maker"
- 
+  PersonalProfileDocument: "http://xmlns.com/foaf/0.1/PersonalProfileDocument",
+  
+  
 } as const;
