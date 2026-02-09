@@ -12,6 +12,7 @@ describe("MeetingDataset / Meeting tests", () => {
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://example.org/meeting/1> a cal:Vevent ;
+
     cal:summary "Team Sync" ;
     cal:location "Zoom Room 123" ;
     cal:comment "Discuss project updates" ;
@@ -92,11 +93,53 @@ describe("MeetingDataset / Meeting tests", () => {
 
         assert.ok(meeting.startDate instanceof Date, "startDate should be a Date");
         assert.ok(meeting.endDate instanceof Date, "endDate should be a Date");
-
-
-       
-
         
     });
+
+
+    it("should ensure all properties are unique text or date values", () => {
+
+        const duplicateRDF = `
+@prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<https://example.org/meeting/1> a cal:Vevent ;
+    cal:summary "Team Sync" ;
+    cal:summary "Duplicate Summary" ;
+    cal:location "Zoom Room 123" ;
+    cal:location "Duplicate Location" ;
+    cal:comment "Discuss project updates" ;
+    cal:comment "Duplicate Comment" ;
+    cal:dtstart "2026-02-09T10:00:00Z"^^xsd:dateTime ;
+    cal:dtstart "2026-02-09T09:00:00Z"^^xsd:dateTime ;
+    cal:dtend "2026-02-09T11:00:00Z"^^xsd:dateTime ;
+    cal:dtend "2026-02-09T12:00:00Z"^^xsd:dateTime .
+`;
+
+        const store = new Store();
+        store.addQuads(new Parser().parse(duplicateRDF));
+
+        const dataset = new MeetingDataset(store, DataFactory);
+        const meeting = Array.from(dataset.meeting)[0];
+
+        assert.ok(meeting, "No meeting found");
+
+        // Ensure exposed values are single (unique) and correct type
+        assert.equal(typeof meeting.summary, "string");
+        assert.equal(typeof meeting.location, "string");
+        assert.equal(typeof meeting.comment, "string");
+
+        assert.ok(meeting.startDate instanceof Date);
+        assert.ok(meeting.endDate instanceof Date);
+
+        // Ensure no arrays are returned
+        assert.ok(!Array.isArray(meeting.summary));
+        assert.ok(!Array.isArray(meeting.location));
+        assert.ok(!Array.isArray(meeting.comment));
+        assert.ok(!Array.isArray(meeting.startDate));
+        assert.ok(!Array.isArray(meeting.endDate));
+    });
+
+
 
 });
