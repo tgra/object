@@ -1,4 +1,4 @@
-import { TermMappings, ValueMappings, TermWrapper,  DatasetWrapper } from "rdfjs-wrapper"
+import { TermMappings, ValueMappings, TermWrapper } from "rdfjs-wrapper"
 import {  ICAL } from "../vocabulary/mod.js"
 
 export class Meeting extends TermWrapper {
