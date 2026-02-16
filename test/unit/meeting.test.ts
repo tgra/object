@@ -1,12 +1,9 @@
 import { DataFactory, Parser, Store } from "n3"
 import assert from "node:assert"
 import { describe, it } from "node:test"
-
 import { MeetingDataset } from "@solid/object";
 
-
 describe("MeetingDataset / Meeting tests", () => {
-
     const sampleRDF = `
 @prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
