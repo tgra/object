@@ -48,5 +48,4 @@ export class Meeting extends TermWrapper {
     set endDate(value: Date | undefined) {
         this.overwriteNullable(ICAL.dtend, value, TermMappings.dateToLiteral)
     }
-
 }
