@@ -77,7 +77,6 @@ describe("MeetingDataset / Meeting tests", () => {
         assert.ok(meeting, "No meeting found")
      
         // Check property types 
-
         assert.equal(typeof meeting.summary, "string");
         assert.equal(typeof meeting.location, "string");
         assert.equal(typeof meeting.comment, "string");
