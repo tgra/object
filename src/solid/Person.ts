@@ -19,8 +19,6 @@ export class Person extends TermWrapper {
         this.overwriteNullable(VCARD.fn, value, TermMappings.stringToLiteral)
     }
 
-
-
     get webId(): string | undefined {
         return this.singularNullable(VCARD.hasURL, ValueMappings.iriToString)
     }
