@@ -32,7 +32,6 @@ describe("MeetingDataset / Meeting tests", () => {
         assert.equal(meeting.location, "Zoom Room 123");
         assert.equal(meeting.comment, "Discuss project updates");
 
-       
         assert.ok(meeting.startDate instanceof Date);
         assert.ok(meeting.endDate instanceof Date);
 
