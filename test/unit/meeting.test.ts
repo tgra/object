@@ -139,7 +139,4 @@ describe("MeetingDataset / Meeting tests", () => {
         assert.ok(!Array.isArray(meeting.startDate));
         assert.ok(!Array.isArray(meeting.endDate));
     });
-
-
-
 });
