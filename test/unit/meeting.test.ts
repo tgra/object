@@ -39,8 +39,6 @@ describe("MeetingDataset / Meeting tests", () => {
         assert.equal(meeting.endDate?.toISOString(), "2026-02-09T11:00:00.000Z");
     });
 
-
-
     it("should allow setting of meeting properties", () => {
         const store = new Store();
         store.addQuads(new Parser().parse(sampleRDF));
