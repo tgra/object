@@ -86,12 +86,9 @@ describe("MeetingDataset / Meeting tests", () => {
 
         assert.ok(meeting.startDate instanceof Date, "startDate should be a Date");
         assert.ok(meeting.endDate instanceof Date, "endDate should be a Date");
-        
     });
 
-
     it("should ensure all properties are unique text or date values", () => {
-
         const duplicateRDF = `
 @prefix cal: <http://www.w3.org/2002/12/cal/ical#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
