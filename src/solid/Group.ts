@@ -3,12 +3,10 @@ import { VCARD } from "../vocabulary/mod.js"
 import { Person } from "./Person.js"
 
 export class Group extends TermWrapper {
+    
     get name(): string | undefined {
         const value = this.singularNullable(VCARD.fn, ValueMappings.literalToString)
 
-        if (!value) {
-            throw new Error("Group must have a vcard:fn (name)")
-        }
         return value
     }
 
@@ -20,13 +18,12 @@ export class Group extends TermWrapper {
     }
 
     get members(): Set<Person> {
-        const individuals = new Set<Person>()
+        const persons = new Set<Person>()
 
         for (const iri of this.objects(VCARD.member, ValueMappings.iriToString, TermMappings.stringToIri)) {
-            const individual = new Person(iri, this.dataset, this.factory)
-            individuals.add(individual)
+            const person = new Person(iri, this.dataset, this.factory)
+            persons.add(person)
         }
-        return individuals
+        return persons
     }
-
 }

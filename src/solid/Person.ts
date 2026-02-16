@@ -1,8 +1,9 @@
 import { TermWrapper, ValueMappings, TermMappings } from "rdfjs-wrapper"
-import { VCARD } from "../vocabulary/mod.js"
-import { rdf } from "rdf-namespaces" // or define RDF.type yourself
+import { VCARD, OWL } from "../vocabulary/mod.js"
+import { rdf } from "rdf-namespaces" 
 
 export class Person extends TermWrapper {
+
     constructor(term: any, dataset: any, factory?: any) {
         super(term, dataset, factory)
         if (!dataset.has(term, rdf.type, VCARD.Individual)) {
@@ -15,16 +16,32 @@ export class Person extends TermWrapper {
     }
 
     set name(value: string | undefined) {
-        if (!value) throw new Error("Individual name cannot be empty")
         this.overwriteNullable(VCARD.fn, value, TermMappings.stringToLiteral)
     }
 
+    get phone(): string | undefined {
+        return this.singularNullable(VCARD.phone, ValueMappings.literalToString)
+    }
+
+    set phone(value: string | undefined) {
+        this.overwriteNullable(VCARD.phone, value, TermMappings.stringToLiteral)
+    }
+
+    get email(): string | undefined {
+        return this.singularNullable(VCARD.email, ValueMappings.literalToString)
+    }
+
+    set email(value: string | undefined) {
+        this.overwriteNullable(VCARD.email, value, TermMappings.stringToLiteral)
+    }
+
+
     get webId(): string | undefined {
-        return this.singularNullable(VCARD.hasURL, ValueMappings.iriToString)
+        return this.singularNullable(OWL.sameAs, ValueMappings.iriToString)
     }
 
     set webId(value: string | undefined) {
         if (!value) return
-        this.overwriteNullable(VCARD.hasURL, value, TermMappings.stringToIri)
+        this.overwriteNullable(OWL.sameAs, value, TermMappings.stringToIri)
     }
 }
