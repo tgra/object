@@ -4,10 +4,14 @@ import { rdf } from "rdf-namespaces"
 
 export class Person extends TermWrapper {
 
-    constructor(term: any, dataset: any, factory?: any) {
-        super(term, dataset, factory)
-        if (!dataset.has(term, rdf.type, VCARD.Individual)) {
-            throw new Error(`Node ${term.value} is not a vcard:Individual`)
+    constructor(term: string | any, dataset: any, factory?: any) {
+        // Convert string to NamedNode if needed
+        const t = typeof term === "string" ? (factory || dataset.factory).namedNode(term) : term
+        super(t, dataset, factory)
+
+        // ✅ Always declare as vcard:Individual
+        if (!dataset.has(this.term, rdf.type, VCARD.Individual)) {
+            dataset.add((factory || dataset.factory).quad(this.term, rdf.type, VCARD.Individual))
         }
     }
 

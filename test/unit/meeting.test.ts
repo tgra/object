@@ -168,8 +168,8 @@ describe("MeetingDataset / Meeting tests", () => {
     
     <https://example.org/meeting/rfc1>
         a cal:Vevent ;
-        cal:summary "Board Meeting" ;
-        cal:comment "Discuss quarterly earnings and projections." ;
+        cal:summary "Meeting" ;
+        cal:comment "Discuss events" ;
         cal:location "Conference Room 1" ;
         cal:dtstart "2026-07-10T13:00:00Z"^^xsd:dateTime ;
         cal:dtend "2026-07-10T15:30:00Z"^^xsd:dateTime .
