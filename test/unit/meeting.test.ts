@@ -67,8 +67,6 @@ describe("MeetingDataset / Meeting tests", () => {
         assert.equal(meeting.endDate.toISOString(), newEnd.toISOString());
     });
 
-
-
     it("should ensure all properties are correct type", () => {
         const store = new Store();
         store.addQuads(new Parser().parse(sampleRDF));
