@@ -3,7 +3,7 @@ import {  ICAL } from "../vocabulary/mod.js"
 
 export class MeetingDataset extends DatasetWrapper {
     get meeting(): Iterable<Meeting> {
-        return this.instancesOf(ICAL.vevent, Meeting)
+        return this.instancesOf(ICAL.Vevent, Meeting)
     }
 }
 
