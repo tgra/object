@@ -4,5 +4,5 @@ export const ICAL = {
   dtstart: "http://www.w3.org/2002/12/cal/ical#dtstart",
   location: "http://www.w3.org/2002/12/cal/ical#location",
   summary: "http://www.w3.org/2002/12/cal/ical#summary",
-  vevent: "http://www.w3.org/2002/12/cal/ical#Vevent"
+  Vevent: "http://www.w3.org/2002/12/cal/ical#Vevent"
 } as const;
