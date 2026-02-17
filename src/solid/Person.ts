@@ -9,7 +9,7 @@ export class Person extends TermWrapper {
         const t = typeof term === "string" ? (factory || dataset.factory).namedNode(term) : term
         super(t, dataset, factory)
 
-        // ✅ Always declare as vcard:Individual
+        // Always declare as vcard:Individual
         if (!dataset.has(this.term, rdf.type, VCARD.Individual)) {
             dataset.add((factory || dataset.factory).quad(this.term, rdf.type, VCARD.Individual))
         }
