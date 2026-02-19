@@ -7,7 +7,7 @@ export class Agent extends TermWrapper {
     }
 
     get vcardHasUrl(): string | undefined {
-        return this.singularNullable(VCARD.hasUrl, ValueMappings.iriToString)
+        return this.singularNullable(VCARD.hasURL, ValueMappings.iriToString)
     }
 
     get organization(): string | null {

@@ -2,7 +2,7 @@ import { DataFactory, Parser, Store } from "n3"
 import assert from "node:assert"
 import { describe, it } from "node:test"
 
-import { Profile } from "../profile.js"
+import { Profile } from "@solid/object"
 import { Person } from "@solid/object"
 
 describe("Profile tests", () => {

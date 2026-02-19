@@ -1,12 +1,5 @@
-import { TermMappings, ValueMappings, TermWrapper,  DatasetWrapper } from "rdfjs-wrapper"
+import { TermMappings, ValueMappings, TermWrapper } from "rdfjs-wrapper"
 import {  ICAL } from "../vocabulary/mod.js"
-
-
-export class MeetingDataset extends DatasetWrapper {
-    get meeting(): Iterable<Meeting> {
-        return this.instancesOf(ICAL.vevent, Meeting)
-    }
-}
 
 export class Meeting extends TermWrapper {
     get summary(): string | undefined {
@@ -48,5 +41,4 @@ export class Meeting extends TermWrapper {
     set endDate(value: Date | undefined) {
         this.overwriteNullable(ICAL.dtend, value, TermMappings.dateToLiteral)
     }
-
 }

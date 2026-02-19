@@ -37,13 +37,16 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "@rdfjs/data-model": "^2.1.1",
     "@solid/object": "^0.4.0",
+    "rdf-namespaces": "^1.16.0",
     "rdfjs-wrapper": "^0.15.0"
   },
   "devDependencies": {
     "@rdfjs/types": "^2",
     "@types/n3": "^1",
     "@types/node": "^24",
+    "@types/rdf-js": "^4.0.1",
     "n3": "^1",
     "typescript": "^5"
   },

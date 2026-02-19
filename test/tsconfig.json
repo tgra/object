@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist/",
-    "rootDir": ".",
+    "rootDir": "/",
     "paths": {
       "@solid/object": ["../dist/mod.d.ts"]
     }

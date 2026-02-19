@@ -1,12 +1,17 @@
-
 export const VCARD = {
+    Group: "http://www.w3.org/2006/vcard/ns#Group",
+    Individual: "http://www.w3.org/2006/vcard/ns#Individual",
+    Organization: "http://www.w3.org/2006/vcard/ns#Organization",
+    email: "http://www.w3.org/2006/vcard/ns#email",
     fn: "http://www.w3.org/2006/vcard/ns#fn",
     hasEmail: "http://www.w3.org/2006/vcard/ns#hasEmail",
-    hasValue: "http://www.w3.org/2006/vcard/ns#hasValue",
     hasPhoto: "http://www.w3.org/2006/vcard/ns#hasPhoto",
     hasTelephone: "http://www.w3.org/2006/vcard/ns#hasTelephone",
-    title: "http://www.w3.org/2006/vcard/ns#title",
-    hasUrl: "http://www.w3.org/2006/vcard/ns#hasUrl",
+    hasURL: "http://www.w3.org/2006/vcard/ns#hasURL",
+    hasValue: "http://www.w3.org/2006/vcard/ns#hasValue",
+    member: "http://www.w3.org/2006/vcard/ns#member",
     organizationName: "http://www.w3.org/2006/vcard/ns#organization-name",
+    phone: "http://www.w3.org/2006/vcard/ns#phone",
     role: "http://www.w3.org/2006/vcard/ns#organization-name",
+    title: "http://www.w3.org/2006/vcard/ns#title",
 } as const;

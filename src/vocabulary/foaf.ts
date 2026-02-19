@@ -10,12 +10,8 @@ export const FOAF = {
   name: "http://xmlns.com/foaf/0.1/name",
   nick: "http://xmlns.com/foaf/0.1/nick",
   primaryTopic: "http://xmlns.com/foaf/0.1/primaryTopic",
-
-
   Account: "http://xmlns.com/foaf/0.1/Account",
   OnlineAccount: "http://xmlns.com/foaf/0.1/OnlineAccount",
   Person: "http://xmlns.com/foaf/0.1/Person",
   PersonalProfileDocument: "http://xmlns.com/foaf/0.1/PersonalProfileDocument",
-  
-  
 } as const;
