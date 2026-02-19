@@ -1,0 +1,22 @@
+export const SOC = {
+    BlueSkyAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#BlueSkyAccount",
+    Digg: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#Digg",
+    FacebookAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#FacebookAccount",
+    GithubAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#GithubAccount",
+    InstagramAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#InstagramAccount",
+    LinkedInAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#LinkedInAccount",
+    MastodonAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#MastodonAccount",
+    MatrixAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#MatrixAccount",
+    MediumAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#MediumAccount",
+    NostrAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#NostrAccount",
+    OrcidAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#OrcidAccount",
+    PinterestAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#PinterestAccount",
+    RedditAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#RedditAccount",
+    SnapchatAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#SnapchatAccount",
+    StravaAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#StravaAccount",
+    TiktokAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#TiktokAccount",
+    TumblrAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#TumblrAccount",
+    TwitterAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#TwitterAccount",
+    OtherAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#OtherAccount",
+  };
+  
