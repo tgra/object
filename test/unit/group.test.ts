@@ -2,105 +2,178 @@ import { DataFactory, Parser, Store } from "n3"
 import assert from "node:assert"
 import { describe, it } from "node:test"
 
-import { GroupDataset } from "@solid/object"
-import { Person } from "@solid/object"
+
+import { Group, Person } from "@solid/object";
 
 
-// Sample RDF for an existing group with two members
 
- /*
-const sampleRDF = `
+describe("Group tests", () => {
+
+    const sampleRDF = `
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
-<https://example.org/group/1> a vcard:Group ;
+<https://example.org/group/1>
+    a vcard:Group ;
     vcard:fn "Engineering Team" ;
-    vcard:member <https://example.org/person/alice> ;
-    vcard:member <https://example.org/person/bob> .
+    vcard:member <https://example.org/person/1> ;
+    vcard:member <https://example.org/person/2> .
+`;
+
+    it("should parse and retrieve group name", () => {
+        const store = new Store()
+        store.addQuads(new Parser().parse(sampleRDF))
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/1"),
+            store,
+            DataFactory
+        )
+
+        assert.equal(group.name, "Engineering Team")
+        assert.equal(typeof group.name, "string")
+    })
+
+    it("should allow setting group name", () => {
+        const store = new Store()
+        store.addQuads(new Parser().parse(sampleRDF))
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/1"),
+            store,
+            DataFactory
+        )
+
+        group.name = "Updated Team"
+
+        assert.equal(group.name, "Updated Team")
+    })
+
+    it("should throw when setting empty group name", () => {
+        const store = new Store()
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/empty"),
+            store,
+            DataFactory
+        )
+
+        assert.throws(() => {
+            group.name = undefined as any
+        })
+    })
+
+    it("should parse members as Person instances", () => {
+        const store = new Store()
+        store.addQuads(new Parser().parse(sampleRDF))
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/1"),
+            store,
+            DataFactory
+        )
+
+        const members = group.members
+
+        assert.ok(members instanceof Set)
+        assert.equal(members.size, 2)
+
+        for (const member of members) {
+            assert.ok(member instanceof Person)
+        }
+    })
+
+    it("should add a new member", () => {
+        const store = new Store()
+        store.addQuads(new Parser().parse(sampleRDF))
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/1"),
+            store,
+            DataFactory
+        )
+
+        const newPerson = new Person(
+            DataFactory.namedNode("https://example.org/person/3"),
+            store,
+            DataFactory
+        )
+
+        group.addMember(newPerson)
+
+        const members = group.members
+        assert.equal(members.size, 3)
+
+        const iris = Array.from(members).map(p => p.term.value)
+        assert.ok(iris.includes("https://example.org/person/3"))
+    })
+
+    it("should delete a member", () => {
+        const store = new Store()
+        store.addQuads(new Parser().parse(sampleRDF))
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/1"),
+            store,
+            DataFactory
+        )
+
+        const personToRemove = new Person(
+            DataFactory.namedNode("https://example.org/person/1"),
+            store,
+            DataFactory
+        )
+
+        group.deleteMember(personToRemove)
+
+        const members = group.members
+        assert.equal(members.size, 1)
+
+        const iris = Array.from(members).map(p => p.term.value)
+        assert.ok(!iris.includes("https://example.org/person/1"))
+    })
+
+    it("should ensure members are unique", () => {
+        const duplicateRDF = `
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+<https://example.org/group/dup>
+    a vcard:Group ;
+    vcard:member <https://example.org/person/1> ;
+    vcard:member <https://example.org/person/1> .
+`
+        const store = new Store()
+        store.addQuads(new Parser().parse(duplicateRDF))
+
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/dup"),
+            store,
+            DataFactory
+        )
+
+        const members = group.members
+
+        assert.equal(members.size, 1)
+    })
+
+    it("should return empty set if no members exist", () => {
+        const emptyRDF = `
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+
+<https://example.org/group/empty>
+    a vcard:Group .
 `
 
-describe("GroupDataset / Group tests", () => {
-
-     
-    it("should parse a group and retrieve its properties", () => {
         const store = new Store()
-        store.addQuads(new Parser().parse(sampleRDF))
+        store.addQuads(new Parser().parse(emptyRDF))
 
-        const dataset = new GroupDataset(store, DataFactory)
-        const groups = Array.from(dataset.group)
-        assert.ok(groups.length > 0, "No groups found")
+        const group = new Group(
+            DataFactory.namedNode("https://example.org/group/empty"),
+            store,
+            DataFactory
+        )
 
-        const group = groups[0]!
-        assert.equal(group.name, "Engineering Team")
-
-        const memberIRIs = Array.from(group.members).map((m: Person) => m.term.value)
-        assert.ok(memberIRIs.includes("https://example.org/person/alice"))
-        assert.ok(memberIRIs.includes("https://example.org/person/bob"))
+        assert.ok(group.members instanceof Set)
+        assert.equal(group.members.size, 0)
     })
 
-    
-    it("should allow changing group name", () => {
-        const store = new Store()
-        store.addQuads(new Parser().parse(sampleRDF))
-
-        const dataset = new GroupDataset(store, DataFactory)
-        const group = Array.from(dataset.group)[0]!
-
-        group.name = "Product Team"
-        assert.equal(group.name, "Product Team")
-    })
-
-  
-    it("should allow adding a new member", () => {
-        const store = new Store()
-        store.addQuads(new Parser().parse(sampleRDF))
-
-        const dataset = new GroupDataset(store, DataFactory)
-        const group = Array.from(dataset.group)[0]!
-
-        // Create new person (automatically typed as vcard:Individual)
-        const charlie = new Person("https://example.org/person/charlie", store, DataFactory)
-        charlie.name = "Charlie"
-
-        group.addMember(charlie)
-
-        const memberNames = Array.from(group.members).map((m: Person) => m.name)
-        assert.ok(memberNames.includes("Charlie"))
-        assert.ok(memberNames.includes("Alice") || memberNames.includes("Bob"))
-    })
-    it("should allow removing a member", () => {
-        const store = new Store()
-        store.addQuads(new Parser().parse(sampleRDF))
-
-        const dataset = new GroupDataset(store, DataFactory)
-        const group = Array.from(dataset.group)[0]!
-
-        const alice = new Person("https://example.org/person/alice", store, DataFactory)
-        group.deleteMember(alice)
-
-        const memberIRIs = Array.from(group.members).map((m: Person) => m.term.value)
-        assert.ok(!memberIRIs.includes("https://example.org/person/alice"))
-        assert.ok(memberIRIs.includes("https://example.org/person/bob"))
-    })
-
-    it("should reflect live changes in the dataset", () => {
-        const store = new Store()
-        store.addQuads(new Parser().parse(sampleRDF))
-
-        const dataset = new GroupDataset(store, DataFactory)
-        const group = Array.from(dataset.group)[0]!
-
-        const dave = new Person("https://example.org/person/dave", store, DataFactory)
-        group.addMember(dave)
-
-        const bob = new Person("https://example.org/person/bob", store, DataFactory)
-        group.deleteMember(bob)
-
-        const memberIRIs = Array.from(group.members).map((m: Person) => m.term.value)
-        assert.deepEqual(memberIRIs.sort(), [
-            "https://example.org/person/alice",
-            "https://example.org/person/dave"
-        ])
-    })
-       
 })
- */

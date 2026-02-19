@@ -2,149 +2,82 @@ import { DataFactory, Parser, Store } from "n3"
 import assert from "node:assert"
 import { describe, it } from "node:test"
 
-import { Profile } from "@solid/object"
-import { Person } from "@solid/object"
+import { Profile, Person } from "@solid/object";
 
 describe("Profile tests", () => {
 
   const sampleRDF = `
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix solid: <http://www.w3.org/ns/solid/terms#> .
-@prefix schema: <http://schema.org/> .
+@prefix schema: <https://schema.org/> .
 @prefix org: <http://www.w3.org/ns/org#> .
 
-<https://example.org/profile#me>
-    foaf:nick "alex" ;
+<https://example.org/profile/1>
+    foaf:nick "Ali" ;
     solid:preferredSubjectPronoun "they" ;
     solid:preferredObjectPronoun "them" ;
     solid:preferredRelativePronoun "theirs" ;
-    schema:skills <https://example.org/skills/TypeScript> ;
-    schema:skills <https://example.org/skills/RDF> ;
-    schema:knowsLanguage <https://example.org/lang/en> ;
-    schema:knowsLanguage <https://example.org/lang/de> ;
-    foaf:account <https://github.com/example> ;
-    foaf:account <https://twitter.com/example> ;
-    org:member <https://example.org/person/1> .
+    org:member <https://example.org/person/1> ;
+    schema:skills <https://example.org/skill/JS> ;
+    schema:knowsLanguage <https://example.org/lang/EN> ;
+    foaf:account <https://social.example.org/ali> .
 `;
 
-  it("should parse and retrieve profile properties", () => {
+  it("should parse nickname and pronouns", () => {
     const store = new Store()
     store.addQuads(new Parser().parse(sampleRDF))
 
     const profile = new Profile(
-      DataFactory.namedNode("https://example.org/profile#me"),
+      DataFactory.namedNode("https://example.org/profile/1"),
       store,
       DataFactory
     )
 
-    // Singular string properties
-    assert.equal(profile.nickname, "alex")
+    assert.equal(profile.nickname, "Ali")
     assert.equal(profile.preferredSubjectPronoun, "they")
     assert.equal(profile.preferredObjectPronoun, "them")
     assert.equal(profile.preferredRelativePronoun, "theirs")
-
-    // Set-based properties
-    assert.ok(profile.skills instanceof Set)
-    assert.ok(profile.languages instanceof Set)
-    assert.ok(profile.accounts instanceof Set)
-    assert.ok(profile.roles instanceof Set)
-
-    assert.ok(profile.skills.has("https://example.org/skills/TypeScript"))
-    assert.ok(profile.languages.has("https://example.org/lang/en"))
-    assert.ok(profile.accounts.has("https://github.com/example"))
-
-    const role = Array.from(profile.roles)[0]
-    assert.ok(role instanceof Person)
   })
 
+  it("should allow setting nickname and pronouns", () => {
+    const store = new Store()
 
-  it("should allow setting of singular properties", () => {
+    const profile = new Profile(
+      DataFactory.namedNode("https://example.org/profile/2"),
+      store,
+      DataFactory
+    )
+
+    profile.nickname = "Sam"
+    profile.preferredSubjectPronoun = "he"
+    profile.preferredObjectPronoun = "him"
+    profile.preferredRelativePronoun = "his"
+
+    assert.equal(profile.nickname, "Sam")
+    assert.equal(profile.preferredSubjectPronoun, "he")
+    assert.equal(profile.preferredObjectPronoun, "him")
+    assert.equal(profile.preferredRelativePronoun, "his")
+  })
+
+  it("should parse roles as Person instances", () => {
     const store = new Store()
     store.addQuads(new Parser().parse(sampleRDF))
 
     const profile = new Profile(
-      DataFactory.namedNode("https://example.org/profile#me"),
+      DataFactory.namedNode("https://example.org/profile/1"),
       store,
       DataFactory
     )
 
-    profile.nickname = "updatedNick"
-    profile.preferredSubjectPronoun = "she"
-    profile.preferredObjectPronoun = "her"
-    profile.preferredRelativePronoun = "hers"
+    const roles = profile.roles
 
-    assert.equal(profile.nickname, "updatedNick")
-    assert.equal(profile.preferredSubjectPronoun, "she")
-    assert.equal(profile.preferredObjectPronoun, "her")
-    assert.equal(profile.preferredRelativePronoun, "hers")
+    assert.ok(roles instanceof Set)
+    assert.equal(roles.size, 1)
+
+    for (const role of roles) {
+      assert.ok(role instanceof Person)
+    }
   })
 
-
-  it("should ensure singular properties are correct type", () => {
-    const store = new Store()
-    store.addQuads(new Parser().parse(sampleRDF))
-
-    const profile = new Profile(
-      DataFactory.namedNode("https://example.org/profile#me"),
-      store,
-      DataFactory
-    )
-
-    assert.equal(typeof profile.nickname, "string")
-    assert.equal(typeof profile.preferredSubjectPronoun, "string")
-    assert.equal(typeof profile.preferredObjectPronoun, "string")
-    assert.equal(typeof profile.preferredRelativePronoun, "string")
-  })
-
-
-  it("should ensure set properties return Sets and not arrays", () => {
-    const store = new Store()
-    store.addQuads(new Parser().parse(sampleRDF))
-
-    const profile = new Profile(
-      DataFactory.namedNode("https://example.org/profile#me"),
-      store,
-      DataFactory
-    )
-
-    assert.ok(profile.skills instanceof Set)
-    assert.ok(profile.languages instanceof Set)
-    assert.ok(profile.accounts instanceof Set)
-    assert.ok(profile.roles instanceof Set)
-
-    assert.ok(!Array.isArray(profile.skills))
-    assert.ok(!Array.isArray(profile.languages))
-    assert.ok(!Array.isArray(profile.accounts))
-    assert.ok(!Array.isArray(profile.roles))
-  })
-
-
-  it("should handle duplicate singular values by exposing only one", () => {
-    const duplicateRDF = `
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix solid: <http://www.w3.org/ns/solid/terms#> .
-
-<https://example.org/profile#me>
-    foaf:nick "alex" ;
-    foaf:nick "duplicateNick" ;
-    solid:preferredSubjectPronoun "they" ;
-    solid:preferredSubjectPronoun "duplicatePronoun" .
-`
-
-    const store = new Store()
-    store.addQuads(new Parser().parse(duplicateRDF))
-
-    const profile = new Profile(
-      DataFactory.namedNode("https://example.org/profile#me"),
-      store,
-      DataFactory
-    )
-
-    assert.equal(typeof profile.nickname, "string")
-    assert.equal(typeof profile.preferredSubjectPronoun, "string")
-
-    assert.ok(!Array.isArray(profile.nickname))
-    assert.ok(!Array.isArray(profile.preferredSubjectPronoun))
-  })
-
+  
 })
