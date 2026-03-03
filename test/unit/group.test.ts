@@ -2,9 +2,6 @@ import { DataFactory, Parser, Store } from "n3"
 import assert from "node:assert"
 import { describe, it } from "node:test"
 import { Group, Person } from "@solid/object";
-
-
-
 describe("Group tests", () => {
 
     const sampleRDF = `
