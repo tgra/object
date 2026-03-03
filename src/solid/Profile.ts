@@ -1,5 +1,5 @@
-import { TermMappings, ValueMappings, TermWrapper, DatasetWrapper } from "rdfjs-wrapper"
-import { FOAF, SOLID, SCHEMA, ORG, VCARD } from "../vocabulary/mod.js"
+import { TermMappings, ValueMappings, TermWrapper, ObjectMapping } from "rdfjs-wrapper"
+import { FOAF, SOLID, SCHEMA, ORG } from "../vocabulary/mod.js"
 import { Person } from "./Person.js"
 
 

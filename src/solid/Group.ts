@@ -1,4 +1,4 @@
-import { TermMappings, ValueMappings, TermWrapper } from "rdfjs-wrapper"
+import { TermMappings, ValueMappings, TermWrapper, ObjectMapping } from "rdfjs-wrapper"
 import { VCARD } from "../vocabulary/mod.js"
 import { Person } from "./Person.js"
 

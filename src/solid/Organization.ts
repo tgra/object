@@ -1,5 +1,5 @@
 import { TermWrapper, ValueMappings, TermMappings } from "rdfjs-wrapper"
-import { VCARD, SCHEMA, RDF } from "../vocabulary/mod.js"
+import { SCHEMA, RDF } from "../vocabulary/mod.js"
 
 export class Organization extends TermWrapper {
     get name(): string | undefined {
