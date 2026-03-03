@@ -15,4 +15,4 @@ export const SCHEMA = {
     PerformingGroup: "https://schema.org/PerformingGroup",
     Project: "https://schema.org/Project",
     SportsOrganization: "https://schema.org/SportsOrganization",
-} as const;
+} as const
