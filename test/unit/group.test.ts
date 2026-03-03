@@ -3,7 +3,6 @@ import assert from "node:assert"
 import { describe, it } from "node:test"
 import { Group, Person } from "@solid/object";
 describe("Group tests", () => {
-
     const sampleRDF = `
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
