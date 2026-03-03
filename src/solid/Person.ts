@@ -45,7 +45,6 @@ export class Person extends TermWrapper {
     }
 
     set webId(value: string | undefined) {
-        if (!value) return
         this.overwriteNullable(OWL.sameAs, value, TermMappings.stringToIri)
     }
 }
