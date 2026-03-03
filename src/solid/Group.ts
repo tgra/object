@@ -5,9 +5,7 @@ import { Person } from "./Person.js"
 export class Group extends TermWrapper {
     
     get name(): string | undefined {
-        const value = this.singularNullable(VCARD.fn, ValueMappings.literalToString)
-
-        return value
+        return this.singularNullable(VCARD.fn, ValueMappings.literalToString)
     }
 
     set name(value: string | undefined) {
