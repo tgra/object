@@ -1,6 +1,5 @@
 import { TermWrapper, ValueMappings, TermMappings } from "rdfjs-wrapper"
 import { VCARD, OWL } from "../vocabulary/mod.js"
-import { rdf } from "rdf-namespaces" 
 
 export class Person extends TermWrapper {
     get name(): string | undefined {
