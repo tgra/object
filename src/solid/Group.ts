@@ -9,9 +9,6 @@ export class Group extends TermWrapper {
     }
 
     set name(value: string | undefined) {
-        if (!value) {
-            throw new Error("Group name cannot be empty")
-        }
         this.overwriteNullable(VCARD.fn, value, TermMappings.stringToLiteral)
     }
 
