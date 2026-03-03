@@ -3,18 +3,6 @@ import { VCARD, OWL } from "../vocabulary/mod.js"
 import { rdf } from "rdf-namespaces" 
 
 export class Person extends TermWrapper {
-
-    constructor(term: string | any, dataset: any, factory?: any) {
-        // Convert string to NamedNode if needed
-        const t = typeof term === "string" ? (factory || dataset.factory).namedNode(term) : term
-        super(t, dataset, factory)
-
-        // Always declare as vcard:Individual
-        if (!dataset.has(this.term, rdf.type, VCARD.Individual)) {
-            dataset.add((factory || dataset.factory).quad(this.term, rdf.type, VCARD.Individual))
-        }
-    }
-
     get name(): string | undefined {
         return this.singularNullable(VCARD.fn, ValueMappings.literalToString)
     }
