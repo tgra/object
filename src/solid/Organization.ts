@@ -14,17 +14,6 @@ const allowedOrgTypes = new Set<string>([
 ])
 
 export class Organization extends TermWrapper {
-    constructor(term: string | any, dataset: any, factory?: any) {
-        // Convert string to NamedNode if needed
-        const t = typeof term === "string" ? (factory || dataset.factory).namedNode(term) : term
-        super(t, dataset, factory)
-
-        // Always declare as vcard:Organization
-        if (!dataset.has(this.term, RDF.type, VCARD.Organization)) {
-            dataset.add((factory || dataset.factory).quad(this.term, RDF.type, VCARD.Organization))
-        }
-    }
-
     get name(): string | undefined {
         return this.singularNullable(SCHEMA.name, ValueMappings.literalToString)
     }
