@@ -48,19 +48,4 @@ export class Organization extends TermWrapper {
         }
         return orgTypes
     }
-
-    /** Add a new type for this organization */
-    addType(orgType: SchemaOrganizationType): void {
-        if (!allowedOrgTypes.has(orgType)) {
-            throw new Error(`Invalid organization type: ${orgType}`)
-        }
-        const types = this.objects(
-            RDF.type,
-            ValueMappings.iriToString,
-            TermMappings.stringToIri
-        )
-        types.add(orgType)
-    }
-
-
 }
