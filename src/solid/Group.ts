@@ -16,13 +16,7 @@ export class Group extends TermWrapper {
     }
 
     get members(): Set<Person> {
-        const persons = new Set<Person>()
-
-        for (const iri of this.objects(VCARD.member, ValueMappings.iriToString, TermMappings.stringToIri)) {
-            const person = new Person(iri, this.dataset, this.factory)
-            persons.add(person)
-        }
-        return persons
+        return this.objects(VCARD.member, ObjectMapping.as(Person), ObjectMapping.as(Person))
     }
 
     /** Add a new Person to this group */
