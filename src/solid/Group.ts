@@ -3,7 +3,6 @@ import { VCARD } from "../vocabulary/mod.js"
 import { Person } from "./Person.js"
 
 export class Group extends TermWrapper {
-    
     get name(): string | undefined {
         return this.singularNullable(VCARD.fn, ValueMappings.literalToString)
     }
