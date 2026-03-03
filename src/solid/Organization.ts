@@ -1,18 +1,6 @@
 import { TermWrapper, ValueMappings, TermMappings } from "rdfjs-wrapper"
 import { VCARD, SCHEMA, RDF } from "../vocabulary/mod.js"
 
-type SchemaOrganizationType = typeof SCHEMA[keyof typeof SCHEMA]
-
-const allowedOrgTypes = new Set<string>([
-    SCHEMA.Corporation,
-    SCHEMA.EducationalOrganization,
-    SCHEMA.GovernmentOrganization,
-    SCHEMA.NGO,
-    SCHEMA.PerformingGroup,
-    SCHEMA.Project,
-    SCHEMA.SportsOrganization,
-])
-
 export class Organization extends TermWrapper {
     get name(): string | undefined {
         return this.singularNullable(SCHEMA.name, ValueMappings.literalToString)
