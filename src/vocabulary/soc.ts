@@ -18,5 +18,4 @@ export const SOC = {
     TumblrAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#TumblrAccount",
     TwitterAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#TwitterAccount",
     OtherAccount: "https://solidos.github.io/profile-pane/src/ontology/socialMedia.ttl#OtherAccount",
-  };
-  
+  }
