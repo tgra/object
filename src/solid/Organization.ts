@@ -19,10 +19,6 @@ export class Organization extends TermWrapper {
     }
 
     get types(): Set<string> {
-        const orgTypes = new Set<string>()
-        for (const iri of this.objects(RDF.type, ValueMappings.iriToString, TermMappings.stringToIri)) {
-            orgTypes.add(iri)
-        }
-        return orgTypes
+        return this.objects(RDF.type, ValueMappings.iriToString, TermMappings.stringToIri)
     }
 }
